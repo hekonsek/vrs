@@ -36,5 +36,5 @@ npm run test
 To install the library into your project execute the following command:
 
 ```
-npm install -g git+https://github.com/hekonsek/quickstart-node-ts-cli#v0.0.0
+sudo npm install -g https://github.com/hekonsek/vrs/tarball/0.14.0
 ```
