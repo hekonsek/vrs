@@ -33,8 +33,14 @@ npm run test
 
 ## Installation
 
-To install the library into your project execute the following command:
+To install `vrs` into your system execute the following command:
 
 ```
-sudo npm install -g https://github.com/hekonsek/vrs/tarball/0.14.0
+npm install -g https://github.com/hekonsek/vrs/tarball/0.15.0
+```
+
+Alternatively you can indicate a git commit instead of a release version:
+
+```
+npm install -g git+https://github.com/hekonsek/vrs#gitCommitHash
 ```
