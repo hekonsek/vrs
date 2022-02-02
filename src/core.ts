@@ -14,4 +14,12 @@ export class Vrs {
         return semver.sort(linesWithoutLastEmpty).reverse()
     }
 
+    up(): string {
+        let latest = semver.parse(this.latest())
+        latest.inc("minor")
+        exec.execSync("git tag " + latest.toString())
+        exec.execSync("git push --tags", {stdio: "ignore"})
+        return latest.toString()
+    }
+
 }

@@ -12,6 +12,13 @@ var Vrs = /** @class */ (function () {
         var linesWithoutLastEmpty = lines.slice(0, lines.length - 1);
         return semver.sort(linesWithoutLastEmpty).reverse();
     };
+    Vrs.prototype.up = function () {
+        var latest = semver.parse(this.latest());
+        latest.inc("minor");
+        exec.execSync("git tag " + latest.toString());
+        exec.execSync("git push --tags", { stdio: "ignore" });
+        return latest.toString();
+    };
     return Vrs;
 }());
 export { Vrs };
