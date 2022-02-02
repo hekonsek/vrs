@@ -1,11 +1,11 @@
 {
-  "name": "quickstart-node-ts-cli",
+  "name": "vrs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "bin": {
-    "quickstart-node-ts-cli": "./dist/index.js"
+    "vrs": "./dist/index.js"
   },
   "scripts": {
     "init": "npm install",
