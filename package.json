@@ -19,6 +19,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^27.4.0",
+    "@types/semver": "^7.3.9",
     "jest": "^27.4.7",
     "ts-jest": "^27.1.3"
   },
