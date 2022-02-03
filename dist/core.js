@@ -10,12 +10,13 @@ var Vrs = /** @class */ (function () {
     Vrs.prototype.parseTags = function (tagsOutput) {
         var tagLines = tagsOutput.toString().split("\n");
         var versionLines = tagLines.filter(function (line) { return semver.parse(line) != null; });
-        return semver.sort(versionLines).reverse();
+        var linesWithoutPrefix = versionLines.map(function (line) { return line[0] == "v" ? line.slice(1) : line; });
+        return semver.sort(linesWithoutPrefix).reverse();
     };
     Vrs.prototype.up = function () {
         var latest = semver.parse(this.latest());
         latest.inc("minor");
-        exec.execSync("git tag " + latest.toString());
+        exec.execSync("git tag v" + latest.toString());
         exec.execSync("git push --tags", { stdio: "ignore" });
         return latest.toString();
     };

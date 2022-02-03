@@ -12,7 +12,7 @@ describe('Vrs', () => {
     it('should remove last empty output line', async () => {
         let greeting = vrs.parseTags("v0.0.0\nv0.1.0\n")
         expect(greeting).toHaveLength(2)
-        expect(greeting[0]).toBe("v0.1.0")
+        expect(greeting[0]).toBe("0.1.0")
     })
 
     it('should bump project version', async () => {
@@ -24,7 +24,7 @@ describe('Vrs', () => {
     it('should trim non-semver', async () => {
         let greeting = vrs.parseTags("v0.0.0\nv0.1.0\niamNotVersion\n")
         expect(greeting).toHaveLength(2)
-        expect(greeting[0]).toBe("v0.1.0")
+        expect(greeting[0]).toBe("0.1.0")
     })
 
     it('should treat version without prefix as semver', async () => {
