@@ -8,9 +8,9 @@ var Vrs = /** @class */ (function () {
         return this.parseTags(tagsOutput.toString())[0];
     };
     Vrs.prototype.parseTags = function (tagsOutput) {
-        var lines = tagsOutput.toString().split("\n");
-        var linesWithoutLastEmpty = lines.slice(0, lines.length - 1);
-        return semver.sort(linesWithoutLastEmpty).reverse();
+        var tagLines = tagsOutput.toString().split("\n");
+        var versionLines = tagLines.filter(function (line) { return semver.parse(line) != null; });
+        return semver.sort(versionLines).reverse();
     };
     Vrs.prototype.up = function () {
         var latest = semver.parse(this.latest());

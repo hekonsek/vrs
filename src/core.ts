@@ -9,9 +9,9 @@ export class Vrs {
     }
 
     parseTags(tagsOutput: String): string[] {
-        let lines = tagsOutput.toString().split("\n")
-        let linesWithoutLastEmpty = lines.slice(0, lines.length - 1)
-        return semver.sort(linesWithoutLastEmpty).reverse()
+        let tagLines = tagsOutput.toString().split("\n")
+        let versionLines = tagLines.filter(line => semver.parse(line) != null)
+        return semver.sort(versionLines).reverse()
     }
 
     up(): string {
