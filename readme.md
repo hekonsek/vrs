@@ -36,7 +36,7 @@ npm run test
 To install `vrs` into your system execute the following command:
 
 ```
-npm install -g https://github.com/hekonsek/vrs/tarball/v0.25.0
+npm install -g https://github.com/hekonsek/vrs/tarball/v0.26.0
 ```
 
 Alternatively you can indicate a git commit instead of a release version:
