@@ -7,7 +7,7 @@ var yarg = yargs(hideBin(process.argv))
     .scriptName("vrs")
     .command("latest", "displays the latest version tag")
     .command("up", "bumps up version tag");
-var vrs = new Vrs("x");
+var vrs = new Vrs();
 var yellow = chalk.yellow;
 if (yarg.argv._[0] == "latest") {
     var latest = vrs.latest();

@@ -38,7 +38,7 @@ describe('Vrs', () => {
     it('should return undefined for no version', async () => {
         let tmpDir = fs.mkdtempSync("/tmp/test")
         exec.execSync("git init", {cwd: tmpDir})
-        vrs = new Vrs(tmpDir)
+        vrs = new Vrs({workingDirectory: tmpDir})
         expect(vrs.latest()).toBeUndefined()
     })
 

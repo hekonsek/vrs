@@ -1,16 +1,20 @@
-import exec from "child_process";
+import exec, {ExecSyncOptionsWithBufferEncoding} from "child_process";
 import semver from "semver";
 
 export class Vrs {
 
-    private readonly workingDirectory?: string
+    private readonly vrsOptions?: VrsOptions
 
-    constructor(workingDirectory?: string) {
-        this.workingDirectory = workingDirectory
+    constructor(vrsOptions?: VrsOptions) {
+        this.vrsOptions = vrsOptions;
+    }
+
+    private execOptions(): ExecSyncOptionsWithBufferEncoding {
+        return this.vrsOptions ? {cwd: this.vrsOptions.workingDirectory} : {}
     }
 
     latest(): string {
-        let tagsOutput = exec.execSync("git tag", {cwd: this.workingDirectory})
+        let tagsOutput = exec.execSync("git tag", this.execOptions())
         return this.parseTags(tagsOutput.toString())[0]
     }
 
@@ -24,9 +28,17 @@ export class Vrs {
     up(): string {
         let latest = semver.parse(this.latest())
         latest.inc("minor")
-        exec.execSync("git tag v" + latest.toString(), {cwd: this.workingDirectory})
-        exec.execSync("git push --tags", {stdio: "ignore", cwd: this.workingDirectory})
+        exec.execSync("git tag v" + latest.toString(), this.execOptions())
+        let options = this.execOptions()
+        options.stdio = "ignore"
+        exec.execSync("git push --tags", options)
         return latest.toString()
     }
+
+}
+
+export interface VrsOptions {
+
+    workingDirectory: string
 
 }
