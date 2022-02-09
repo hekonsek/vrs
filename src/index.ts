@@ -16,7 +16,7 @@ let yarg = yargs(hideBin(process.argv))
         "bumps up version tag"
     )
 
-let vrs = new Vrs("x")
+let vrs = new Vrs()
 let yellow = chalk.yellow
 if( yarg.argv._[0] == "latest" ) {
     let latest = vrs.latest()
