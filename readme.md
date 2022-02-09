@@ -1,46 +1,33 @@
-# Quickstart: Node command line tool (TypeScript)
+# Vrs - (sem)version management for your Git projects
 
-This is a template project for a command line (CLI) tool in Node and TypeScript. Includes commonly used CLI libraries:
-- **yargs** for command line parsing
-- **boxen** for drawing UI boxes
-- **chalk** for styling and coloring text
-
-## Building
-
-To init, build and test your tool execute:
-
-```
-npm run all
-```
-
-To only init your tool execute:
-
-```
-npm run init
-```
-
-To only build your tool execute:
-
-```
-npm run build
-```
-
-To only test it execute:
-
-```
-npm run test
-```
+Vrs makes it easier to manage versions of your Git-based project. It can be used to:
+- find the latest version of your project based on git tags
+- release new version of your project
 
 ## Installation
 
 To install `vrs` into your system execute the following command:
 
 ```
-npm install -g https://github.com/hekonsek/vrs/tarball/v0.26.0
+npm install -g https://github.com/hekonsek/vrs/tarball/v0.28.0
 ```
 
-Alternatively you can indicate a git commit instead of a release version:
+## Usage
+
+To display the latest version of your project:
 
 ```
-npm install -g git+https://github.com/hekonsek/vrs#gitCommitHash
+$ vrs latest
+0.28.0
 ```
+
+To release a new version of your project:
+
+```
+$ vrs up
+0.28.0 -> 0.29.0
+```
+
+## License
+
+This project is distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html).
