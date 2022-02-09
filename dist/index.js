@@ -7,15 +7,21 @@ var yarg = yargs(hideBin(process.argv))
     .scriptName("vrs")
     .command("latest", "displays the latest version tag")
     .command("up", "bumps up version tag");
-var vrs = new Vrs();
+var vrs = new Vrs("x");
+var yellow = chalk.yellow;
 if (yarg.argv._[0] == "latest") {
-    console.log(vrs.latest());
+    var latest = vrs.latest();
+    console.log(latest || yellow("No version defined yet."));
 }
 else if (yarg.argv._[0] == "up") {
     var latest = vrs.latest();
-    var bumped = vrs.up();
-    var green = chalk.yellow;
-    console.log(green(latest) + " -> " + green(bumped));
+    if (latest) {
+        var bumped = vrs.up();
+        console.log(yellow(latest) + " -> " + yellow(bumped));
+    }
+    else {
+        console.log(yellow("No version defined yet."));
+    }
 }
 else {
     yarg.showHelp();

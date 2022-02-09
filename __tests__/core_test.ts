@@ -1,6 +1,8 @@
 import 'jest'
 import {Vrs} from "../src/core";
 import semver from "semver";
+import * as fs from "fs";
+import exec from "child_process";
 
 describe('Vrs', () => {
     let vrs: Vrs;
@@ -31,6 +33,13 @@ describe('Vrs', () => {
         let greeting = vrs.parseTags("0.0.0\n0.1.0")
         expect(greeting).toHaveLength(2)
         expect(greeting[0]).toBe("0.1.0")
+    })
+
+    it('should return undefined for no version', async () => {
+        let tmpDir = fs.mkdtempSync("/tmp/test")
+        exec.execSync("git init", {cwd: tmpDir})
+        vrs = new Vrs(tmpDir)
+        expect(vrs.latest()).toBeUndefined()
     })
 
 });

@@ -16,14 +16,19 @@ let yarg = yargs(hideBin(process.argv))
         "bumps up version tag"
     )
 
-let vrs = new Vrs()
+let vrs = new Vrs("x")
+let yellow = chalk.yellow
 if( yarg.argv._[0] == "latest" ) {
-    console.log(vrs.latest())
+    let latest = vrs.latest()
+    console.log(latest || yellow("No version defined yet."))
 } else if( yarg.argv._[0] == "up" ) {
     let latest = vrs.latest()
-    let bumped = vrs.up()
-    let green = chalk.yellow
-    console.log(green(latest) + " -> " + green(bumped))
+    if(latest) {
+        let bumped = vrs.up()
+        console.log(yellow(latest) + " -> " + yellow(bumped))
+    } else {
+        console.log(yellow("No version defined yet."))
+    }
 } else {
     yarg.showHelp()
 }

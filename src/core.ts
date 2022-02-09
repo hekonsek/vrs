@@ -3,8 +3,14 @@ import semver from "semver";
 
 export class Vrs {
 
+    private readonly workingDirectory?: string
+
+    constructor(workingDirectory?: string) {
+        this.workingDirectory = workingDirectory
+    }
+
     latest(): string {
-        let tagsOutput = exec.execSync("git tag")
+        let tagsOutput = exec.execSync("git tag", {cwd: this.workingDirectory})
         return this.parseTags(tagsOutput.toString())[0]
     }
 
@@ -18,8 +24,8 @@ export class Vrs {
     up(): string {
         let latest = semver.parse(this.latest())
         latest.inc("minor")
-        exec.execSync("git tag v" + latest.toString())
-        exec.execSync("git push --tags", {stdio: "ignore"})
+        exec.execSync("git tag v" + latest.toString(), {cwd: this.workingDirectory})
+        exec.execSync("git push --tags", {stdio: "ignore", cwd: this.workingDirectory})
         return latest.toString()
     }
 

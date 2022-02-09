@@ -1,10 +1,11 @@
 import exec from "child_process";
 import semver from "semver";
 var Vrs = /** @class */ (function () {
-    function Vrs() {
+    function Vrs(workingDirectory) {
+        this.workingDirectory = workingDirectory;
     }
     Vrs.prototype.latest = function () {
-        var tagsOutput = exec.execSync("git tag");
+        var tagsOutput = exec.execSync("git tag", { cwd: this.workingDirectory });
         return this.parseTags(tagsOutput.toString())[0];
     };
     Vrs.prototype.parseTags = function (tagsOutput) {
@@ -16,8 +17,8 @@ var Vrs = /** @class */ (function () {
     Vrs.prototype.up = function () {
         var latest = semver.parse(this.latest());
         latest.inc("minor");
-        exec.execSync("git tag v" + latest.toString());
-        exec.execSync("git push --tags", { stdio: "ignore" });
+        exec.execSync("git tag v" + latest.toString(), { cwd: this.workingDirectory });
+        exec.execSync("git push --tags", { stdio: "ignore", cwd: this.workingDirectory });
         return latest.toString();
     };
     return Vrs;
