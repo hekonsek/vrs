@@ -15,13 +15,8 @@ if (yarg.argv._[0] == "latest") {
 }
 else if (yarg.argv._[0] == "up") {
     var latest = vrs.latest();
-    if (latest) {
-        var bumped = vrs.up();
-        console.log(yellow(latest) + " -> " + yellow(bumped));
-    }
-    else {
-        console.log(yellow("No version defined yet."));
-    }
+    var bumped = vrs.up();
+    console.log(yellow(latest) + " -> " + yellow(bumped));
 }
 else {
     yarg.showHelp();

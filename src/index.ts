@@ -23,12 +23,8 @@ if( yarg.argv._[0] == "latest" ) {
     console.log(latest || yellow("No version defined yet."))
 } else if( yarg.argv._[0] == "up" ) {
     let latest = vrs.latest()
-    if(latest) {
-        let bumped = vrs.up()
-        console.log(yellow(latest) + " -> " + yellow(bumped))
-    } else {
-        console.log(yellow("No version defined yet."))
-    }
+    let bumped = vrs.up()
+    console.log(yellow(latest) + " -> " + yellow(bumped))
 } else {
     yarg.showHelp()
 }
