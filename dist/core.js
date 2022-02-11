@@ -18,7 +18,7 @@ var Vrs = /** @class */ (function () {
         return semver.sort(linesWithoutPrefix).reverse();
     };
     Vrs.prototype.up = function () {
-        var latest = semver.parse(this.latest());
+        var latest = semver.parse(this.latest() || "0.0.0");
         latest.inc("minor");
         exec.execSync("git tag v" + latest.toString(), this.execOptions());
         var options = this.execOptions();

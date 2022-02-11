@@ -26,7 +26,7 @@ export class Vrs {
     }
 
     up(): string {
-        let latest = semver.parse(this.latest())
+        let latest = semver.parse(this.latest() || "0.0.0")
         latest.inc("minor")
         exec.execSync("git tag v" + latest.toString(), this.execOptions())
         let options = this.execOptions()

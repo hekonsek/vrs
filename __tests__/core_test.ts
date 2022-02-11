@@ -42,4 +42,22 @@ describe('Vrs', () => {
         expect(vrs.latest()).toBeUndefined()
     })
 
+    it('should release 0.1.0 for no version', async () => {
+        let tmpDir = fs.mkdtempSync("/tmp/test")
+        exec.execSync("git init", {cwd: tmpDir})
+        fs.writeFileSync(tmpDir + "/readme.md", "someContent")
+        exec.execSync("git add readme.md", {cwd: tmpDir})
+        exec.execSync("git commit -m 'Initial commit'", {cwd: tmpDir})
+        vrs = new Vrs({workingDirectory: tmpDir})
+        expect(vrs.latest()).toBeUndefined()
+        try {
+            vrs.up()
+        } catch (err) {
+            if(!err.message.includes("Command failed: git push --tags")) {
+                throw err
+            }
+        }
+        expect(vrs.latest()).toBe("0.1.0")
+    })
+
 });
