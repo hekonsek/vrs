@@ -9,7 +9,7 @@ Vrs makes it easier to manage versions of your Git-based project. It can be used
 To install `vrs` into your system execute the following command:
 
 ```
-npm install -g https://github.com/hekonsek/vrs/tarball/v0.44.0
+npm install -g https://github.com/hekonsek/vrs/tarball/v0.46.0
 ```
 
 ## Usage
@@ -26,6 +26,15 @@ To release a new version of your project:
 ```
 $ vrs up
 0.28.0 -> 0.29.0
+```
+
+If your project has no version defined in Git yet, `vrs up` will initialize version `0.1.0` for you:
+
+```
+$ vrs latest
+No version defined yet.
+$ vrs up
+undefined -> 0.1.0
 ```
 
 ## License
