@@ -20,6 +20,9 @@ describe('Vrs', () => {
     it('should bump project version', async () => {
         let latest = semver.parse(vrs.latest())
         let bumped = semver.parse(vrs.up())
+        if(latest == null || bumped == null) {
+            throw new Error("Latest and bumped versions cannot be null.")
+        }
         expect(bumped.compare(latest)).toBeGreaterThan(0)
     })
 
@@ -53,7 +56,7 @@ describe('Vrs', () => {
         try {
             vrs.up()
         } catch (err) {
-            if(!err.message.includes("Command failed: git push --tags")) {
+            if(!(err as Error).message.includes("Command failed: git push --tags")) {
                 throw err
             }
         }
