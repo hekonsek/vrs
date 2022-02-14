@@ -28,7 +28,7 @@ export class Vrs {
     up(): string {
         let latest = semver.parse(this.latest() || "0.0.0")
         if(!latest)
-            throw new Error()
+            throw new Error("Latest version cannot be parsed nor defaulted.")
         latest.inc("minor")
         exec.execSync("git tag v" + latest.toString(), this.execOptions())
         let options = this.execOptions()
