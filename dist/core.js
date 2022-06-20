@@ -20,7 +20,7 @@ var Vrs = /** @class */ (function () {
     Vrs.prototype.up = function () {
         var latest = semver.parse(this.latest() || "0.0.0");
         if (!latest)
-            throw new Error();
+            throw new Error("Latest version cannot be parsed nor defaulted.");
         latest.inc("minor");
         exec.execSync("git tag v" + latest.toString(), this.execOptions());
         var options = this.execOptions();
