@@ -14,6 +14,7 @@ export class Vrs {
     }
 
     latest(): string {
+        exec.execSync("git fetch --tags", this.execOptions())
         let tagsOutput = exec.execSync("git tag", this.execOptions())
         return this.parseTags(tagsOutput.toString())[0]
     }

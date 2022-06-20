@@ -8,6 +8,7 @@ var Vrs = /** @class */ (function () {
         return this.vrsOptions ? { cwd: this.vrsOptions.workingDirectory } : {};
     };
     Vrs.prototype.latest = function () {
+        exec.execSync("git fetch --tags", this.execOptions());
         var tagsOutput = exec.execSync("git tag", this.execOptions());
         return this.parseTags(tagsOutput.toString())[0];
     };
