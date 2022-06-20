@@ -12,7 +12,7 @@ To install `vrs` into your system execute the following command:
  npm install -g https://github.com/hekonsek/vrs/tarball/v0.48.0
 ```
 
-Please keep in mind that `vrs` used Node v17.
+Please keep in mind that `vrs` uses Node v17.
 
 ## Usage
 
